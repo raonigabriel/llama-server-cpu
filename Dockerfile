@@ -1,12 +1,12 @@
 ARG UBUNTU_VERSION=22.04
 ARG CMAKE_ARGS="-DGGML_CCACHE=OFF -DGGML_AVX=OFF -DGGML_AVX512=OFF -DGGML_AVX2=OFF -DGGML_FMA=OFF -DGGML_F16C=OFF"
 ARG BUILD_DATE=
-ARG LLAMA_CPP_REVISION=
+# ARG LLAMA_CPP_REVISION=
 
 FROM ubuntu:$UBUNTU_VERSION AS common
 
-RUN test -n "$BUILD_DATE" || (echo "Build failed, BUILD_DATE is not set." && exit 1) && \
-    test -n "$LLAMA_CPP_REVISION" || (echo "Build failed, LLAMA_CPP_REVISION is not set." && exit 1)
+RUN test -n "$BUILD_DATE" || (echo "Build failed, BUILD_DATE is not set." && exit 1)
+#    test -n "$LLAMA_CPP_REVISION" || (echo "Build failed, LLAMA_CPP_REVISION is not set." && exit 1)
 
 RUN apt-get update && \
     apt-get install -y libcurl4-openssl-dev libgomp1 curl && \
