@@ -8,7 +8,7 @@ RUN apt-get update && \
     apt-get install -y libcurl4-openssl-dev libgomp1 curl && \
     rm -rf /var/lib/apt/lists/*
 
-FROM common as build
+FROM common As build
 ARG CMAKE_ARGS="-DGGML_CCACHE=OFF -DGGML_AVX=OFF -DGGML_AVX512=OFF -DGGML_AVX2=OFF -DGGML_FMA=OFF -DGGML_F16C=OFF"
 ARG BUILD_DATE=
 
@@ -37,7 +37,7 @@ LABEL org.opencontainers.image.title="llama-server-cpu" \
       org.opencontainers.image.description="A lightweight, cpu-only compiled image based on ggerganov/llama.cpp " \
       org.opencontainers.image.source="https://github.com/raoni-gabriel/llama-server-cpu" \
       org.opencontainers.image.licenses="MIT" \
-      org.opencontainers.image.created=${BUILD_DATE}
+      org.opencontainers.image.created=$BUILD_DATE
 
 # org.opencontainers.image.revision=$LLAMA_CPP_REVISION
 
