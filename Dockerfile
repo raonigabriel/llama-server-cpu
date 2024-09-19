@@ -1,6 +1,5 @@
 ARG UBUNTU_VERSION=22.04
-ARG CMAKE_ARGS="-DGGML_CCACHE=OFF -DGGML_AVX=OFF -DGGML_AVX512=OFF -DGGML_AVX2=OFF -DGGML_FMA=OFF -DGGML_F16C=OFF"
-ARG BUILD_DATE=
+
 # ARG LLAMA_CPP_REVISION=
 
 FROM ubuntu:$UBUNTU_VERSION AS common
@@ -10,6 +9,8 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 
 FROM common as build
+ARG CMAKE_ARGS="-DGGML_CCACHE=OFF -DGGML_AVX=OFF -DGGML_AVX512=OFF -DGGML_AVX2=OFF -DGGML_FMA=OFF -DGGML_F16C=OFF"
+ARG BUILD_DATE=
 
 RUN apt-get update && \
     apt-get install -y build-essential git cmake && \
