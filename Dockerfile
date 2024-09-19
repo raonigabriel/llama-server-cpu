@@ -5,9 +5,6 @@ ARG BUILD_DATE=
 
 FROM ubuntu:$UBUNTU_VERSION AS common
 
-RUN test -n "$BUILD_DATE" || (echo "Build failed, BUILD_DATE is not set." && exit 1)
-#    test -n "$LLAMA_CPP_REVISION" || (echo "Build failed, LLAMA_CPP_REVISION is not set." && exit 1)
-
 RUN apt-get update && \
     apt-get install -y libcurl4-openssl-dev libgomp1 curl && \
     rm -rf /var/lib/apt/lists/*
@@ -30,6 +27,10 @@ RUN echo "Building llama-server..." && \
     echo "Done."
 
 FROM common AS runtime
+
+ENV BUILD_DATE=${BUILD_DATE}
+RUN test -n "$BUILD_DATE" || (echo "Build failed, BUILD_DATE is not set." && exit 1)
+#    test -n "$LLAMA_CPP_REVISION" || (echo "Build failed, LLAMA_CPP_REVISION is not set." && exit 1)
 
 LABEL org.opencontainers.image.title="llama-server-cpu" \
       org.opencontainers.image.description="A lightweight, CPU-only compiled image based on ggerganov/llama.cpp " \
