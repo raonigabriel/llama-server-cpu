@@ -17,6 +17,7 @@ FROM common AS build
 
 # Define build arguments, used to control various GGML optimizations
 ARG CMAKE_ARGS=
+
 # Define a build date argument to be used later in the image metadata
 ARG BUILD_DATE=
 
@@ -33,12 +34,11 @@ WORKDIR /llama.cpp
 
 # Set environment variables for the build process, including the CMake arguments
 ENV LLAMA_CURL=1 \
-    LLAMA_NATIVE=OFF \
     CMAKE_ARGS=$CMAKE_ARGS
 
 # Build the llama-server binary, using all available CPU cores, and strip symbols to reduce binary size
 RUN echo "Building llama-server..." && \
-    LLAMA_NATIVE=OFF make -j$(nproc) llama-server > /dev/null 2>&1 && \
+    make LLAMA_NATIVE=OFF -j$(nproc) llama-server > /dev/null 2>&1 && \
     strip ./llama-server && \
     echo "Done."
 
