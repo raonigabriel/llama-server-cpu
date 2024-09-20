@@ -9,11 +9,11 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 # Update package lists and install necessary dependencies for building and running llama-server
 RUN apt-get update -qq && \
-    apt-get install -y -qq --no-install-recommends libcurl4-openssl-dev libgomp1 curl && \
+    apt-get install -y -qq --no-install-recommends libcurl4-openssl-dev libgomp1 curl  ca-certificates && \
     rm -rf /var/lib/apt/lists/*  # Clean up apt cache to reduce image size
 
 # Create the build stage, starting from the common stage
-FROM common As build
+FROM common AS build
 
 # Define build arguments, used to control various GGML optimizations
 ARG CMAKE_ARGS=
