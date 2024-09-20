@@ -38,7 +38,7 @@ ENV LLAMA_CURL=1 \
 
 # Build the llama-server binary, using all available CPU cores, and strip symbols to reduce binary size
 RUN echo "Building llama-server..." && \
-    make LLAMA_NATIVE=OFF -j$(nproc) llama-server > /dev/null 2>&1 && \
+    cmake -B build LLAMA_NATIVE=OFF -j$(nproc) llama-server > /dev/null 2>&1 && \
     strip ./llama-server && \
     echo "Done."
 
