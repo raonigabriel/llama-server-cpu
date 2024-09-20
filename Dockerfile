@@ -4,6 +4,9 @@ ARG UBUNTU_VERSION=22.04
 # Use the specified Ubuntu version as the base image for a common stage
 FROM ubuntu:$UBUNTU_VERSION AS common
 
+# Set frontend to noninteractive to suppress prompts
+ENV DEBIAN_FRONTEND=noninteractive
+
 # Update package lists and install necessary dependencies for building and running llama-server
 RUN apt-get update && \
     apt-get install -y libcurl4-openssl-dev libgomp1 curl && \
