@@ -101,7 +101,7 @@ A) The image is based on Ubuntu and designed to be minimal (fewer moving parts =
 
 Q) Is there a way to protect the endpoints by using some sort of auth?
 
-A) Yes, by adding an env var like so:
+A) Yes, by adding the **LLAMA_API_KEY** env var like so:
 ```
 services:
   qwen25_3B:
@@ -113,5 +113,5 @@ services:
       - LLAMA_ARG_MODEL_URL=https://huggingface.co/bartowski/Qwen2.5-3B-Instruct-GGUF/resolve/main/Qwen2.5-3B-Instruct-Q4_K_M.gguf
     restart: unless-stopped
       - LLAMA_API_KEY="sk-my-secret-api-key"
-´´´
+```
 
