@@ -1,4 +1,4 @@
-name: Build and Push Docker Image
+name: Build and Push Docker Images
 
 on:
   workflow_dispatch:
@@ -36,3 +36,4 @@ jobs:
           tags: ghcr.io/${{ github.repository }}:t0-latest
           build-args: |
             BUILD_DATE=${{ env.BUILD_DATE }}
+            CMAKE_ARGS="-DGGML_CCACHE=OFF -DGGML_AVX=OFF -DGGML_AVX512=OFF -DGGML_AVX2=OFF -DGGML_FMA=OFF -DGGML_F16C=OFF"
