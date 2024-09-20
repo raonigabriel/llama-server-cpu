@@ -12,7 +12,7 @@ Think of it as a lightweight version of [ollama](https://ollama.com/), providing
 - t3 = AVX, AVX512, AVX2 are enabled
 - t4 = AVX, AVX512, AVX2, FMA, F16C are enabled
 
-* The images will be tagged accordingly: **t0-latest**, **t1-latest** and so on. Therefore there wil be **NO** image tagged as "latest", you mus pick one of the tiers based on your what features CPU supports. Remmember to pick the higher tiers, because the inference speed of the models will be enhanced.
+* The images will be tagged accordingly: **t0-latest**, **t1-latest** and so on. Therefore there wil be **NO** image tagged as "latest", you must pick one of the tiers based on your what features CPU supports. Remmember to pick the higher tiers, because the inference speed of the models will be enhanced.
 
 * It runs on port 11434, the same used by ollama to ease compatibility.
 
@@ -30,7 +30,21 @@ Think of it as a lightweight version of [ollama](https://ollama.com/), providing
 # Running
 
 ```
-docker run -d -p 11434:11434 -e LLAMA_ARG_MODEL_URL=https://huggingface.co/bartowski/Qwen2.5-3B-Instruct-GGUF/resolve/main/Qwen2.5-3B-Instruct-Q4_K_M.gguf --name qwen2.5_3B ghcr.io/raonigabriel/llama-server-cpu:t0-latest
+docker run -d -p 11434:11434 -e LLAMA_ARG_MODEL_URL=https://huggingface.co/bartowski/Qwen2.5-3B-Instruct-GGUF/resolve/main/Qwen2.5-3B-Instruct-Q4_K_M.gguf --name qwen25_3B ghcr.io/raonigabriel/llama-server-cpu:t0-latest
+```
+
+or using docker-compose:
+
+```
+services:
+  qwen25_3B:
+    image: ghcr.io/raonigabriel/llama-server-cpu:t0-latest
+    container_name: qwen2.5_3B
+    ports:
+      - "11434:11434"
+    environment:
+      - LLAMA_ARG_MODEL_URL=https://huggingface.co/bartowski/Qwen2.5-3B-Instruct-GGUF/resolve/main/Qwen2.5-3B-Instruct-Q4_K_M.gguf
+    restart: unless-stopped
 ```
 
 # FAQ
@@ -80,3 +94,24 @@ A) Just download the model and put it into the models folder.
 Q) My inference speed is not good: model takes a lot time to answer.
 
 A) Try using a higher tier like t5 (if your CPU supports it) or try using a small model instead, with less parameters. The [Qwen2.5](https://huggingface.co/collections/Qwen/qwen25-66e81a666513e518adb90d9e) series of models do offer plenty options for you to pick: 0.5B, 1.5B, 3B, 7B, 14B, 32B, 72B paramers. Just remember that you will **never** get the same performance level as if running models on GPU / TPU / NPU.
+
+Q) What about security?
+
+A) The image is based on Ubuntu and designed to be minimal (fewer moving parts = less attack exposure) and to run as a separate user with **no** root powers.
+
+Q) Is there a way to protect the endpoints by using some sort of auth?
+
+A) Yes, by adding an env var like so:
+```
+services:
+  qwen25_3B:
+    image: ghcr.io/raonigabriel/llama-server-cpu:t0-latest
+    container_name: qwen2.5_3B
+    ports:
+      - "11434:11434"
+    environment:
+      - LLAMA_ARG_MODEL_URL=https://huggingface.co/bartowski/Qwen2.5-3B-Instruct-GGUF/resolve/main/Qwen2.5-3B-Instruct-Q4_K_M.gguf
+    restart: unless-stopped
+      - LLAMA_API_KEY="sk-my-secret-api-key"
+´´´
+
