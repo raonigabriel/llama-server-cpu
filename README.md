@@ -12,17 +12,17 @@ Think of it as a lightweight version of [ollama](https://ollama.com/), providing
 - t3 = AVX, AVX512, AVX2 are enabled
 - t4 = AVX, AVX512, AVX2, FMA, F16C are enabled
 
-* The images will be tagged accordingly: **t0-latest**, **t1-latest** and so on. Therefore there wil be **NO** image tagged as "latest", you mus pick one of the tiers based on your what features CPU supports. Remmember to pick the higher tiers, because the speed of the models will be enhanced.
+* The images will be tagged accordingly: **t0-latest**, **t1-latest** and so on. Therefore there wil be **NO** image tagged as "latest", you mus pick one of the tiers based on your what features CPU supports. Remmember to pick the higher tiers, because the inference speed of the models will be enhanced.
 
 * It runs on port 11434, the same used by ollama to ease compatibility.
 
 * It features a small, chat UI courtesy of llama.cpp on [http://localhost:11434](http://localhost:11434)
 
-* It runs with user/group id 1000 named "user". This eases compatibility [Project IDX]with (https://idx.dev/) and also with bind-mounts for most common Linux distributions.
+* It runs with user/group id 1000 named "user". This eases compatibility with [Project IDX](https://idx.dev/) and also with bind-mounts for most common Linux distributions.
 
 * It features health checks
 
-* It can download model files (GGUF) automatically from the internet by using**LLAMA_ARG_MODEL_URL** (see the running example bellow)
+* It can download model files (GGUF) automatically from the internet by using **LLAMA_ARG_MODEL_URL** (see the running example bellow)
 
 * Models can be cached locally if you "bind-mount" the models folder
 
