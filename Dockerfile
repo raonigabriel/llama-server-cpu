@@ -33,6 +33,7 @@ WORKDIR /llama.cpp
 
 # Set environment variables for the build process, including the CMake arguments
 ENV LLAMA_CURL=1 \
+    LLAMA_NATIVE=OFF \
     CMAKE_ARGS=$CMAKE_ARGS
 
 # Build the llama-server binary, using all available CPU cores, and strip symbols to reduce binary size
