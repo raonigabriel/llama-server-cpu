@@ -30,7 +30,7 @@ Think of it as a lightweight version of [ollama](https://ollama.com/), providing
 # Running
 
 ```
-docker run -d -p 11434:11434 -e LLAMA_ARG_MODEL_URL=https://huggingface.co/bartowski/Qwen2.5-3B-Instruct-GGUF/resolve/main/Qwen2.5-3B-Instruct-Q4_K_M.gguf --name qwen2.5_3B ghcr.io/raonigabriel/llama-server-cpu:t0latest
+docker run -d -p 11434:11434 -e LLAMA_ARG_MODEL_URL=https://huggingface.co/bartowski/Qwen2.5-3B-Instruct-GGUF/resolve/main/Qwen2.5-3B-Instruct-Q4_K_M.gguf --name qwen2.5_3B ghcr.io/raonigabriel/llama-server-cpu:t0-latest
 ```
 
 # FAQ
@@ -63,7 +63,7 @@ Q) How do I create a custom image for a specific model?
 
 A) Simple as setting an environment variable. If you need to install extra software (eg. python), you need to change the user back to "root" then back to "user"
 ```
-FROM ghcr.io/raonigabriel/llama-server-cpu:t0latest
+FROM ghcr.io/raonigabriel/llama-server-cpu:t0-latest
 ENV LLAMA_ARG_MODEL_URL=https://huggingface.co/bartowski/Qwen2.5-3B-Instruct-GGUF/resolve/main/Qwen2.5-3B-Instruct-Q4_K_M.gguf
 
 USER root
@@ -79,4 +79,4 @@ A) Just download the model and put it into the models folder.
 
 Q) My inference speed is not good: model takes a lot time to answer.
 
-A) Try using a higher tier like t5 (if your CPU supports) or try using a small model (with less parameters). The [Qwen2.5](https://huggingface.co/collections/Qwen/qwen25-66e81a666513e518adb90d9e) series of modelsa offer plenty optins: 0.5B, 1.5B, 3B, 7B, 14B, 32B, 72B paramers. Remember: you will **never** get the same performance level as if running models on GPU / TPU / NPU.
+A) Try using a higher tier like t5 (if your CPU supports it) or try using a small model instead, with less parameters. The [Qwen2.5](https://huggingface.co/collections/Qwen/qwen25-66e81a666513e518adb90d9e) series of models do offer plenty options for you to pick: 0.5B, 1.5B, 3B, 7B, 14B, 32B, 72B paramers. Just remember that you will **never** get the same performance level as if running models on GPU / TPU / NPU.
