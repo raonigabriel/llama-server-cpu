@@ -8,8 +8,8 @@ FROM ubuntu:$UBUNTU_VERSION AS common
 ENV DEBIAN_FRONTEND=noninteractive
 
 # Update package lists and install necessary dependencies for building and running llama-server
-RUN apt-get update && \
-    apt-get install -y libcurl4-openssl-dev libgomp1 curl && \
+RUN apt-get update -qq && \
+    apt-get install -y -qq --no-install-recommends libcurl4-openssl-dev libgomp1 curl && \
     rm -rf /var/lib/apt/lists/*  # Clean up apt cache to reduce image size
 
 # Create the build stage, starting from the common stage
@@ -21,8 +21,8 @@ ARG CMAKE_ARGS=
 ARG BUILD_DATE=
 
 # Update package lists and install build dependencies like git, cmake, and build-essential
-RUN apt-get update && \
-    apt-get install -y build-essential git cmake && \
+RUN apt-get update -qq && \
+    apt-get install -y -qq --no-install-recommends  build-essential git cmake && \
     rm -rf /var/lib/apt/lists/*  # Clean up apt cache to reduce image size
 
 # Clone the llama.cpp repository from GitHub with a shallow clone (only the latest commit)
