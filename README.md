@@ -24,7 +24,7 @@ Think of it as a lightweight version of [ollama](https://ollama.com/), providing
 
 * It can download model files (GGUF) automatically from the internet by using **LLAMA_ARG_MODEL_URL** (see the running example bellow)
 
-* Models can be cached locally if you "bind-mount" the models folder
+* Models can be cached locally if you "bind-mount" the models **/home/user/.cache/llama.cpp/** folder
 
 ---
 # Running
@@ -62,13 +62,14 @@ A: No, I have **NO** association of any kind with ollama. It is a wonderfuill pr
 
 Q: Why did you create this?
 
-A: Because their [ollama](https://github.com/ollama/ollama), [LocalAI](https://github.com/mudler/LocalAI) images are bloated (>=3GB) while mine is under 100MB. There are a few reasons why they get so big:
+A: Because their [ollama](https://github.com/ollama/ollama), [LocalAI](https://github.com/mudler/LocalAI) images are bloated (>=3GB) while mine is about 25MB. There are a few reasons why they get so big:
 1) Their images automatically detect wich specific instructions your CPU supports and then use a precompiled version (dynamic loading) designed for it. That way, they need to pack every possibility of instruction set, hence increasing the size of the image.
 2) Some of their images migh have compiled CUDA support. also increasing the size.
 3) Their image may include python, ffmpeg, libs and extra software.
 4) Their image might offer extra features (image generation, audio transcription)
 5) Some of their image have "default models" already loaded into it
 6) I strip debugging symbols from the binary
+7) My image is baed on Alpine instead of Ubuntu
 
 Q) What [quantized](https://huggingface.co/docs/optimum/concept_guides/quantization#quantization) versions of the models do you recommend?
 
@@ -90,7 +91,7 @@ USER user
 
 Q) How do I create a custom image that pre-packages a specific model?
 
-A) Just download the model and put it into the models folder.
+A) Just download the model and put it into the cache **/home/user/.cache/llama.cpp/** folder.
 
 Q) My inference speed is not good: model takes a lot time to answer.
 
@@ -98,7 +99,7 @@ A) Try using a higher tier like t5 (if your CPU supports it) or try using a smal
 
 Q) What about security?
 
-A) The image is based on Ubuntu and designed to be minimal (fewer moving parts = less attack exposure) and to run as a separate user with **no** root powers.
+A) The image is based on Alpine and designed to be minimal (fewer moving parts = less attack exposure) and to run as a separate user with **no** root powers.
 
 Q) Is there a way to protect the endpoints by using some sort of auth?
 
