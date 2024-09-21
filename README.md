@@ -117,3 +117,6 @@ services:
       - LLAMA_API_KEY="sk-my-secret-api-key"
 ```
 
+Q) Do you have an arm64 version?
+
+A) Not yet, but Iit is planned. But  if you are on a MAC, try googling for a "METAL" version of llama-cpp.
