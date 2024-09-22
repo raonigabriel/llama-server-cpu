@@ -83,9 +83,7 @@ FROM ghcr.io/raonigabriel/llama-server-cpu:t0-latest
 ENV LLAMA_ARG_MODEL_URL=https://huggingface.co/bartowski/Qwen2.5-3B-Instruct-GGUF/resolve/main/Qwen2.5-3B-Instruct-Q4_K_M.gguf
 
 USER root
-RUN apt-get update && \
-    apt-get install -y python3-pip && \
-    rm -rf /var/lib/apt/lists/*
+RUN apk add --no-cache py3-pip py3-virtualenv
 USER user
 ```
 
