@@ -37,3 +37,15 @@ jobs:
           build-args: |
             BUILD_DATE=${{ env.BUILD_DATE }}
             CMAKE_ARGS="-DGGML_AVX=OFF -DGGML_AVX2=OFF -DGGML_AVX512=OFF-DGGML_FMA=OFF -DGGML_F16C=OFF"
+
+      - name: Build and push t2 image to ghcr
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: ${{ github.event_name != 'pull_request' }}
+          tags: ghcr.io/${{ github.repository }}:t2-latest
+          build-args: |
+            BUILD_DATE=${{ env.BUILD_DATE }}
+            CMAKE_ARGS="-DGGML_AVX=ON -DGGML_AVX2=ON -DGGML_AVX512=OFF-DGGML_FMA=OFF -DGGML_F16C=OFF"
+
+
