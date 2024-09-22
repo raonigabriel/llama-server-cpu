@@ -23,7 +23,18 @@ RUN apk add --no-cache build-base cmake ccache git curl-dev openssl-dev openssl-
 RUN git clone --depth 1 https://github.com/ggerganov/llama.cpp.git
 
 # Prepare the custom build
-RUN cmake llama.cpp -B build ${CMAKE_ARGS}
+RUN cmake llama.cpp -B build \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DGGML_NATIVE=OFF \
+    -DLLAMA_CURL=ON \
+    -DGGML_STATIC=ON \
+    -DLLAMA_SERVER_SSL=ON \
+    -DOPENSSL_USE_STATIC_LIBS=ON \
+    -DGGML_RPC=ON \
+    -DGGML_OPENMP=ON \
+    -DLLAMA_BUILD_SERVER=ON \
+    -DBUILD_SHARED_LIBS=OFF \
+    ${CMAKE_ARGS}
 
 # Build
 RUN cmake --build build --config Release --target llama-server -j $(nproc)
