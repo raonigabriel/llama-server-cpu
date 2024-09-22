@@ -8,9 +8,9 @@ Think of it as a lightweight version of [ollama](https://ollama.com/), providing
 
 - t0 = No CPU optimizations. Should run even on old computers
 - t1 = AVX is enabled
-- t2 = AVX, AVX512 are enabled
-- t3 = AVX, AVX512, AVX2 are enabled
-- t4 = AVX, AVX512, AVX2, FMA, F16C are enabled
+- t2 = AVX, AVX2 are enabled
+- t3 = AVX, AVX2, AVX512 are enabled
+- t4 = AVX, AVX2, AVX512, FMA, F16C are enabled
 
 * The images will be tagged accordingly: **t0-latest**, **t1-latest** and so on. Therefore there wil be **NO** image tagged as "latest", you must pick one of the tiers based on your what features CPU supports. Remmember to pick the higher tiers, because the inference speed of the models will be enhanced.
 
