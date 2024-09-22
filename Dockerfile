@@ -36,6 +36,9 @@ RUN cmake llama.cpp -B build \
     -DBUILD_SHARED_LIBS=OFF \
     ${CMAKE_ARGS}
 
+# Clean
+RUN cmake --build build --target clean
+
 # Build
 RUN cmake --build build --config Release --target llama-server -j $(nproc)
 
