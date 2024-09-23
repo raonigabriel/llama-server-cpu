@@ -56,7 +56,7 @@ LABEL org.opencontainers.image.title="llama-server-cpu" \
       org.opencontainers.image.description="A (cpu-only) docker image based on ggerganov/llama.cpp" \
       org.opencontainers.image.source="https://github.com/raoni-gabriel/llama-server-cpu" \
       org.opencontainers.image.licenses="MIT" \
-      org.opencontainers.image.created=$BUILD_DATE
+      org.opencontainers.image.created=${BUILD_DATE}
 
 # Set environment variables for runtime configurations of llama-server
 ENV LC_ALL=C.utf8 \
