@@ -6,7 +6,7 @@ Think of it as a lightweight version of [ollama](https://ollama.com/), providing
 # Features
 * This image has 5 increasing "tiers", each one compiled specifically for a given CPU instruction set, as follows:
 
-- t0 = No CPU optimizations. Should run even on old computers
+- t0 = Only using SSE3 CPU optimizations. Should run even on old computers
 - t1 = AVX is enabled
 - t2 = AVX, AVX2 are enabled
 - t3 = AVX, AVX2, AVX512 are enabled
