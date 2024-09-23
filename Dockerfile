@@ -5,7 +5,7 @@ ARG ALPINE_VERSION=3.20.3
 FROM alpine:$ALPINE_VERSION AS common
 
 # Update package lists and install common dependencies
-RUN apk add --no-cache libgomp libstdc++ libgcc curl
+RUN apk add --no-cache libgomp libstdc++ libgcc curl openblas
 
 # Create the build stage, starting from the common stage
 FROM common AS build
@@ -17,7 +17,7 @@ ARG CMAKE_ARGS=
 ARG BUILD_DATE=
 
 # Update package lists and install build dependencies
-RUN apk add --no-cache build-base cmake ccache git curl-dev openssl-dev openssl-libs-static linux-headers
+RUN apk add --no-cache build-base cmake git curl-dev openssl-dev openssl-libs-static openblas-dev linux-headers
 
 # Clone the llama.cpp repository from GitHub with a shallow clone (only the latest commit)
 RUN git clone --depth 1 https://github.com/ggerganov/llama.cpp.git
@@ -25,13 +25,15 @@ RUN git clone --depth 1 https://github.com/ggerganov/llama.cpp.git
 # Prepare the custom build
 RUN cmake llama.cpp -B build \
     -DCMAKE_BUILD_TYPE=Release \
+    -DGGML_CCACHE=OFF \   
     -DGGML_NATIVE=OFF \
     -DLLAMA_CURL=ON \
     -DGGML_STATIC=ON \
     -DLLAMA_SERVER_SSL=ON \
     -DOPENSSL_USE_STATIC_LIBS=ON \
     -DGGML_RPC=ON \
-    -DLLAMA_OPENBLAS=ON \
+    -DGGML_BLAS=ON \
+    -DGGML_BLAS_VENDOR=OpenBLAS \
     -DGGML_OPENMP=ON \
     -DLLAMA_BUILD_SERVER=ON \
     -DBUILD_SHARED_LIBS=OFF \
@@ -70,7 +72,7 @@ RUN addgroup -g 1000 user && \
 # Define a health check command to monitor the container's health by checking the health endpoint
 HEALTHCHECK CMD [ "curl", "-f", "http://localhost:8080/health" ]
 
-# Expose port 11434 for llama-server to listen on (samme as ollama)
+# Expose port 11434 for llama-server to listen on (same as ollama)
 EXPOSE 11434
 
 # Define the entry point for the container, specifying the llama-server binary
