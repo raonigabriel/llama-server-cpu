@@ -6,7 +6,7 @@ Think of it as a lightweight version of [ollama](https://ollama.com/), providing
 # Features
 * This image has 4 increasing "tiers", each one compiled specifically for a given CPU instruction set, as follows:
 
-- t0 = Only using SSE3 CPU optimizations. Should run even on old computers (slow)
+- t0 = Only using SSE3 CPU optimizations. Should run (slow) even on old computers
 - t1 = AVX is enabled
 - t2 = AVX, AVX2 are enabled
 - t3 = AVX, AVX2, AVX512 are enabled
@@ -88,11 +88,11 @@ USER user
 
 Q) How do I create a custom image that pre-packages a specific model?
 
-A) Just download the model and put it into the cache **/home/user/.cache/llama.cpp/** folder.
+A) Just download the model using curl / wget then put it into the cache **/home/user/.cache/llama.cpp/** folder.
 
 Q) My inference speed is not good: model takes a lot time to answer.
 
-A) Try using a higher tier like t5 (if your CPU supports it) or try using a small model instead, with less parameters. The [Qwen2.5](https://huggingface.co/collections/Qwen/qwen25-66e81a666513e518adb90d9e) series of models do offer plenty options for you to pick: 0.5B, 1.5B, 3B, 7B, 14B, 32B, 72B paramers. Just remember that you will **never** get the same performance level as if running models on GPU / TPU / NPU.
+A) Try using a higher tier like t3 (if your CPU supports it) or try using a small model instead, with less parameters. The [Qwen2.5](https://huggingface.co/collections/Qwen/qwen25-66e81a666513e518adb90d9e) series of models do offer plenty options for you to pick: 0.5B, 1.5B, 3B, 7B, 14B, 32B, 72B paramers. Just remember that you will **never** get the same performance level as if running models on GPU / TPU / NPU.
 
 Q) What about security?
 
@@ -105,7 +105,7 @@ A) Yes, by adding the **LLAMA_API_KEY** env var like so:
 services:
   qwen25_3B:
     image: ghcr.io/raonigabriel/llama-server-cpu:t0-latest
-    container_name: qwen2.5_3B
+    container_name: qwen25_3B
     ports:
       - "11434:11434"
     environment:
