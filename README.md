@@ -4,13 +4,12 @@ A (cpu-only) docker image based on [ggerganov/llama.cpp](https://github.com/gger
 Think of it as a lightweight version of [ollama](https://ollama.com/), providing an easy way to run GGUF models locally. 
 
 # Features
-* This image has 5 increasing "tiers", each one compiled specifically for a given CPU instruction set, as follows:
+* This image has 4 increasing "tiers", each one compiled specifically for a given CPU instruction set, as follows:
 
-- t0 = Only using SSE3 CPU optimizations. Should run even on old computers
+- t0 = Only using SSE3 CPU optimizations. Should run even on old computers (slow)
 - t1 = AVX is enabled
 - t2 = AVX, AVX2 are enabled
 - t3 = AVX, AVX2, AVX512 are enabled
-- t4 = AVX, AVX2, AVX512, F16C are enabled
 
 * The images will be tagged accordingly: **t0-latest**, **t1-latest** and so on. Therefore there wil be **NO** image tagged as "latest", you must pick one of the tiers based on your what features CPU supports. Remmember to pick the higher tiers, because the inference speed of the models will be enhanced.
 
@@ -38,7 +37,7 @@ or using docker-compose:
 ```
 services:
   qwen25_3B:
-    image: ghcr.io/raonigabriel/llama-server-cpu:t0-latest
+    image: ghcr.io/raonigabriel/llama-server-cpu:-latest
     container_name: qwen25_3B
     ports:
       - "11434:11434"
