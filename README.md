@@ -10,7 +10,7 @@ Think of it as a lightweight version of [ollama](https://ollama.com/), providing
 - t1 = AVX is enabled
 - t2 = AVX, AVX2 are enabled
 - t3 = AVX, AVX2, AVX512 are enabled
-- t4 = AVX, AVX2, AVX512, FMA, F16C are enabled
+- t4 = AVX, AVX2, AVX512, F16C are enabled
 
 * The images will be tagged accordingly: **t0-latest**, **t1-latest** and so on. Therefore there wil be **NO** image tagged as "latest", you must pick one of the tiers based on your what features CPU supports. Remmember to pick the higher tiers, because the inference speed of the models will be enhanced.
 
@@ -62,7 +62,7 @@ A: No, I have **NO** association of any kind with ollama. It is a wonderfuill pr
 
 Q: Why did you create this?
 
-A: Because their [ollama](https://github.com/ollama/ollama), [LocalAI](https://github.com/mudler/LocalAI) images are bloated (>=3GB) while mine is about 25MB. There are a few reasons why they get so big:
+A: Because their [ollama](https://github.com/ollama/ollama), [LocalAI](https://github.com/mudler/LocalAI) images are bloated (>=3GB) while mine is about 62MB. There are a few reasons why they get so big:
 1) Their images automatically detect wich specific instructions your CPU supports and then use a precompiled version (dynamic loading) designed for it. That way, they need to pack every possibility of instruction set, hence increasing the size of the image.
 2) Some of their images migh have compiled CUDA support. also increasing the size.
 3) Their image may include python, ffmpeg, libs and extra software.
