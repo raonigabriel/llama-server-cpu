@@ -14,13 +14,17 @@ FROM common AS build
 ARG CMAKE_ARGS=
 
 # Define a build date argument to be used later in the image metadata
-ARG BUILD_DATE=
+ARG BUILD_DATE=not-set
 
 # Update package lists and install build dependencies
 RUN apk add --no-cache build-base cmake git curl-dev openssl-dev openssl-libs-static openblas-dev linux-headers
 
 # Clone the llama.cpp repository from GitHub with a shallow clone (only the latest commit)
 RUN git clone --depth 1 https://github.com/ggerganov/llama.cpp.git
+
+# Trick the compiler, to enable SSE3 without using a native build
+ENV CFLAGS="-march=core2 -mtune=core2" \
+    CXXFLAGS="-march=core2 -mtune=core2"
 
 # Prepare the custom build
 RUN cmake llama.cpp -B build \
