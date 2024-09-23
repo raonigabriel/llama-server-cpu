@@ -35,7 +35,7 @@ jobs:
           tags: ghcr.io/${{ github.repository }}:t0-latest
           build-args: |
             BUILD_DATE=${{ env.BUILD_DATE }}
-            CMAKE_ARGS=-DGGML_AVX=OFF -DGGML_AVX2=OFF -DGGML_AVX512=OFF -DGGML_FMA=OFF -DGGML_F16C=OFF
+            CMAKE_ARGS=-DGGML_AVX=OFF -DGGML_FMA=OFF -DGGML_F16C=OFF -DGGML_AVX2=OFF -DGGML_AVX512=OFF
 
   build-t1:
     runs-on: ubuntu-latest
@@ -68,7 +68,7 @@ jobs:
           tags: ghcr.io/${{ github.repository }}:t1-latest
           build-args: |
             BUILD_DATE=${{ env.BUILD_DATE }}
-            CMAKE_ARGS=-DGGML_AVX=ON -DGGML_AVX2=OFF -DGGML_FMA=OFF -DGGML_AVX512=OFF -DGGML_F16C=OFF
+            CMAKE_ARGS=-DGGML_AVX=ON -DGGML_FMA=OFF -DGGML_F16C=OFF -DGGML_AVX2=OFF -DGGML_AVX512=OFF
 
   build-t2:
     runs-on: ubuntu-latest
@@ -101,7 +101,7 @@ jobs:
           tags: ghcr.io/${{ github.repository }}:t2-latest
           build-args: |
             BUILD_DATE=${{ env.BUILD_DATE }}
-            CMAKE_ARGS=-DGGML_AVX=ON -DGGML_AVX2=ON -DGGML_FMA=ON -DGGML_AVX512=OFF -DGGML_F16C=OFF
+            CMAKE_ARGS=-DGGML_AVX=ON -DGGML_FMA=ON -DGGML_F16C=ON -DGGML_AVX2=ON -DGGML_AVX512=OFF
 
   build-t3:
     runs-on: ubuntu-latest
@@ -134,37 +134,5 @@ jobs:
           tags: ghcr.io/${{ github.repository }}:t3-latest
           build-args: |
             BUILD_DATE=${{ env.BUILD_DATE }}
-            CMAKE_ARGS=-DGGML_AVX=ON -DGGML_AVX2=ON -DGGML_FMA=ON -DGGML_AVX512=ON -DGGML_F16C=OFF
+            CMAKE_ARGS=-DGGML_AVX=ON -DGGML_FMA=ON -DGGML_F16C=ON -DGGML_AVX2=ON -DGGML_AVX512=ON
 
-  build-t4:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Set up QEMU
-        uses: docker/setup-qemu-action@v3
-
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
-
-      - name: Generate current date
-        id: vars
-        run: echo "BUILD_DATE=$(date -u +"%Y-%m-%dT%H:%M:%SZ")" >> $GITHUB_ENV
-
-      - name: Log in to GitHub Container Registry
-        uses: docker/login-action@v3
-        with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Build and push t4 image to ghcr
-        uses: docker/build-push-action@v6
-        with:
-          context: .
-          push: ${{ github.event_name != 'pull_request' }}
-          tags: ghcr.io/${{ github.repository }}:t4-latest
-          build-args: |
-            BUILD_DATE=${{ env.BUILD_DATE }}
-            CMAKE_ARGS=-DGGML_AVX=ON -DGGML_AVX2=ON -DGGML_FMA=ON -DGGML_AVX512=ON -DGGML_F16C=ON
