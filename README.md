@@ -117,4 +117,4 @@ services:
 
 Q) Do you have an arm64 version?
 
-A) Not yet, but Iit is planned. But  if you are on a MAC, try googling for a "METAL" version of llama-cpp.
+A) Not yet, but it is planned. Meanwhile, if you are on a MAC, try googling for a "METAL" version of llama-cpp.
