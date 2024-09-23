@@ -68,7 +68,7 @@ jobs:
           tags: ghcr.io/${{ github.repository }}:t1-latest
           build-args: |
             BUILD_DATE=${{ env.BUILD_DATE }}
-            CMAKE_ARGS=-DGGML_AVX=ON -DGGML_FMA=OFF -DGGML_F16C=OFF -DGGML_AVX2=OFF -DGGML_AVX512=OFF
+            CMAKE_ARGS=-DGGML_AVX=ON -DGGML_FMA=ON -DGGML_F16C=ON -DGGML_AVX2=OFF -DGGML_AVX512=OFF
 
   build-t2:
     runs-on: ubuntu-latest
