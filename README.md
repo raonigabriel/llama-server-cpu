@@ -39,7 +39,7 @@ or using docker-compose:
 services:
   qwen25_3B:
     image: ghcr.io/raonigabriel/llama-server-cpu:t0-latest
-    container_name: qwen2.5_3B
+    container_name: qwen25_3B
     ports:
       - "11434:11434"
     environment:
@@ -69,7 +69,7 @@ A: Because their [ollama](https://github.com/ollama/ollama), [LocalAI](https://g
 4) Their image might offer extra features (image generation, audio transcription)
 5) Some of their image have "default models" already loaded into it
 6) I strip debugging symbols from the binary
-7) My image is baed on Alpine instead of Ubuntu
+7) My image is based on Alpine instead of Ubuntu
 
 Q) What [quantized](https://huggingface.co/docs/optimum/concept_guides/quantization#quantization) versions of the models do you recommend?
 
