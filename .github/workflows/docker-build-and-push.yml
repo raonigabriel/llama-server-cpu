@@ -35,7 +35,7 @@ jobs:
           tags: ghcr.io/${{ github.repository }}:t0-latest
           build-args: |
             BUILD_DATE=${{ env.BUILD_DATE }}
-            CMAKE_ARGS="-DGGML_AVX=OFF -DGGML_AVX2=OFF -DGGML_AVX512=OFF-DGGML_FMA=OFF -DGGML_F16C=OFF"
+            CMAKE_ARGS="-DGGML_AVX=OFF -DGGML_AVX2=OFF -DGGML_AVX512=OFF -DGGML_FMA=OFF -DGGML_F16C=OFF"
 
   build-t2:
     runs-on: ubuntu-latest
@@ -68,4 +68,4 @@ jobs:
           tags: ghcr.io/${{ github.repository }}:t2-latest
           build-args: |
             BUILD_DATE=${{ env.BUILD_DATE }}
-            CMAKE_ARGS="-DGGML_AVX=ON -DGGML_AVX2=ON -DGGML_AVX512=OFF-DGGML_FMA=OFF -DGGML_F16C=OFF"
+            CMAKE_ARGS="-DGGML_AVX=ON -DGGML_AVX2=ON -DGGML_AVX512=OFF -DGGML_FMA=OFF -DGGML_F16C=OFF"
