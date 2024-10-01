@@ -46,6 +46,10 @@ services:
     restart: unless-stopped
 ```
 
+# Lightweight models
+ - https://huggingface.co/hugging-quants/Llama-3.2-1B-Instruct-Q4_K_M-GGUF/resolve/main/llama-3.2-1b-instruct-q4_k_m.gguf
+ - https://huggingface.co/hugging-quants/Llama-3.2-3B-Instruct-Q4_K_M-GGUF/resolve/main/llama-3.2-3b-instruct-q4_k_m.gguf
+
 # FAQ
 Q: Where are the docker images served from?
 
