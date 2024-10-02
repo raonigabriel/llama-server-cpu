@@ -65,7 +65,6 @@ LABEL org.opencontainers.image.title="llama-server-cpu" \
 # Set environment variables for runtime configurations of llama-server
 ENV LC_ALL=C.utf8 \
     LLAMA_ARG_HOST=0.0.0.0 \
-    LLAMA_ARG_CTX_SIZE=4096 \
     LLAMA_ARG_ENDPOINT_METRICS=1 \
     LLAMA_ARG_PORT=11434
 
@@ -74,7 +73,7 @@ RUN addgroup -g 1000 user && \
     adduser -u 1000 -G user -h /home/user -D user
 
 # Define a health check command to monitor the container's health by checking the health endpoint
-HEALTHCHECK CMD [ "curl", "-f", "http://localhost:8080/health" ]
+HEALTHCHECK CMD [ "curl", "-f", "http://localhost:11434/health" ]
 
 # Expose port 11434 for llama-server to listen on (same as ollama)
 EXPOSE 11434
